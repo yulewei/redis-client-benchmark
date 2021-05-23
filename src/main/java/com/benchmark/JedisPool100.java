@@ -89,6 +89,16 @@ public class JedisPool100 {
         }
     }
 
+    @Benchmark
+    @Threads(150)
+    @OperationsPerInvocation(COUNT)
+    @BenchmarkMode({Mode.Throughput})
+    public void testThreads150() {
+        try (Jedis jedis = jedisPool.getResource()) {
+            jedis.get("foo");
+        }
+    }
+
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
                 .include(JedisPool100.class.getSimpleName())
