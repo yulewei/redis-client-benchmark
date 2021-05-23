@@ -1,0 +1,13 @@
+plugins {
+    id 'java'
+}
+
+dependencies {
+    compile 'redis.clients:jedis:3.5.2'
+    compile 'io.lettuce:lettuce-core:6.0.5.RELEASE'
+    compile 'org.springframework.data:spring-data-redis:2.4.9'
+    compile 'org.openjdk.jmh:jmh-core:1.31'
+    compile 'org.openjdk.jmh:jmh-generator-annprocess:1.31'
+
+    testCompile 'junit:junit:4.12'
+}
