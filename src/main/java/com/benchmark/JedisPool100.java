@@ -60,16 +60,6 @@ public class JedisPool100 {
     }
 
     @Benchmark
-    @Threads(1)
-    @OperationsPerInvocation(COUNT)
-    @BenchmarkMode({Mode.Throughput})
-    public void testThreads1() {
-        try (Jedis jedis = jedisPool.getResource()) {
-            jedis.get("foo");
-        }
-    }
-
-    @Benchmark
     @Threads(10)
     @OperationsPerInvocation(COUNT)
     @BenchmarkMode({Mode.Throughput})

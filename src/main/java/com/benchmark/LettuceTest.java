@@ -53,14 +53,6 @@ public class LettuceTest {
     }
 
     @Benchmark
-    @Threads(1)
-    @OperationsPerInvocation(COUNT)
-    @BenchmarkMode({Mode.Throughput})
-    public void testThreads1() {
-        connection.sync().get("foo");
-    }
-
-    @Benchmark
     @Threads(10)
     @OperationsPerInvocation(COUNT)
     @BenchmarkMode({Mode.Throughput})

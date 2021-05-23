@@ -59,14 +59,6 @@ public class SpringDataLettuce {
     }
 
     @Benchmark
-    @Threads(1)
-    @OperationsPerInvocation(COUNT)
-    @BenchmarkMode({Mode.Throughput})
-    public void testThreads1() {
-        template.opsForValue().get("foo");
-    }
-
-    @Benchmark
     @Threads(10)
     @OperationsPerInvocation(COUNT)
     @BenchmarkMode({Mode.Throughput})
