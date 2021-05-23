@@ -1,0 +1,4 @@
+Benchmark                    Mode  Cnt    Score     Error   Units
+LettuceTest.testThreads10   thrpt   10   50.254 ±   3.758  ops/ms
+LettuceTest.testThreads100  thrpt   10  578.844 ±  41.012  ops/ms
+LettuceTest.testThreads50   thrpt   10  263.764 ±  22.993  ops/ms
