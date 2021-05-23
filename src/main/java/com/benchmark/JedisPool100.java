@@ -32,8 +32,8 @@ import java.util.concurrent.TimeUnit;
 @Fork(1)
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.Throughput)
-@Warmup(iterations = 3)
-@Measurement(iterations = 5)
+@Warmup(iterations = 5)
+@Measurement(iterations = 10)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class JedisPool100 {
     private static final int COUNT = 100;
@@ -63,9 +63,9 @@ public class JedisPool100 {
     @Threads(10)
     @OperationsPerInvocation(COUNT)
     @BenchmarkMode({Mode.Throughput})
-    public void testThreads10() {
+    public String testThreads10() {
         try (Jedis jedis = jedisPool.getResource()) {
-            jedis.get("foo");
+            return jedis.get("foo");
         }
     }
 
@@ -73,9 +73,9 @@ public class JedisPool100 {
     @Threads(50)
     @OperationsPerInvocation(COUNT)
     @BenchmarkMode({Mode.Throughput})
-    public void testThreads50() {
+    public String testThreads50() {
         try (Jedis jedis = jedisPool.getResource()) {
-            jedis.get("foo");
+            return jedis.get("foo");
         }
     }
 
@@ -83,9 +83,9 @@ public class JedisPool100 {
     @Threads(100)
     @OperationsPerInvocation(COUNT)
     @BenchmarkMode({Mode.Throughput})
-    public void testThreads100() {
+    public String testThreads100() {
         try (Jedis jedis = jedisPool.getResource()) {
-            jedis.get("foo");
+            return jedis.get("foo");
         }
     }
 
@@ -93,9 +93,9 @@ public class JedisPool100 {
     @Threads(150)
     @OperationsPerInvocation(COUNT)
     @BenchmarkMode({Mode.Throughput})
-    public void testThreads150() {
+    public String testThreads150() {
         try (Jedis jedis = jedisPool.getResource()) {
-            jedis.get("foo");
+            return jedis.get("foo");
         }
     }
 
@@ -103,7 +103,7 @@ public class JedisPool100 {
         Options opt = new OptionsBuilder()
                 .include(JedisPool100.class.getSimpleName())
                 .resultFormat(ResultFormatType.TEXT)
-                .result("result-" + System.currentTimeMillis() + ".txt")
+                .result("result/result-" + System.currentTimeMillis() + ".txt")
                 .build();
         new Runner(opt).run();
     }

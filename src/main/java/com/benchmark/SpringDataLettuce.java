@@ -33,8 +33,8 @@ import java.util.concurrent.TimeUnit;
 @Fork(1)
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.Throughput)
-@Warmup(iterations = 3)
-@Measurement(iterations = 5)
+@Warmup(iterations = 5)
+@Measurement(iterations = 10)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class SpringDataLettuce {
     private static final int COUNT = 100;
@@ -62,31 +62,31 @@ public class SpringDataLettuce {
     @Threads(10)
     @OperationsPerInvocation(COUNT)
     @BenchmarkMode({Mode.Throughput})
-    public void testThreads10() {
-        template.opsForValue().get("foo");
+    public String testThreads10() {
+        return template.opsForValue().get("foo");
     }
 
     @Benchmark
     @Threads(50)
     @OperationsPerInvocation(COUNT)
     @BenchmarkMode({Mode.Throughput})
-    public void testThreads50() {
-        template.opsForValue().get("foo");
+    public String testThreads50() {
+        return template.opsForValue().get("foo");
     }
 
     @Benchmark
     @Threads(100)
     @OperationsPerInvocation(COUNT)
     @BenchmarkMode({Mode.Throughput})
-    public void testThreads100() {
-        template.opsForValue().get("foo");
+    public String testThreads100() {
+        return template.opsForValue().get("foo");
     }
 
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
                 .include(SpringDataLettuce.class.getSimpleName())
                 .resultFormat(ResultFormatType.TEXT)
-                .result("result-" + System.currentTimeMillis() + ".txt")
+                .result("result/result-" + System.currentTimeMillis() + ".txt")
                 .build();
         new Runner(opt).run();
     }

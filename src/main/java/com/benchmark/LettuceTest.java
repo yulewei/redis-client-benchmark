@@ -32,8 +32,8 @@ import java.util.concurrent.TimeUnit;
 @Fork(1)
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.Throughput)
-@Warmup(iterations = 3)
-@Measurement(iterations = 5)
+@Warmup(iterations = 5)
+@Measurement(iterations = 10)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class LettuceTest {
     private static final int COUNT = 100;
@@ -56,31 +56,31 @@ public class LettuceTest {
     @Threads(10)
     @OperationsPerInvocation(COUNT)
     @BenchmarkMode({Mode.Throughput})
-    public void testThreads10() {
-        connection.sync().get("foo");
+    public String testThreads10() {
+        return connection.sync().get("foo");
     }
 
     @Benchmark
     @Threads(50)
     @OperationsPerInvocation(COUNT)
     @BenchmarkMode({Mode.Throughput})
-    public void testThreads50() {
-        connection.sync().get("foo");
+    public String testThreads50() {
+        return connection.sync().get("foo");
     }
 
     @Benchmark
     @Threads(100)
     @OperationsPerInvocation(COUNT)
     @BenchmarkMode({Mode.Throughput})
-    public void testThreads100() {
-        connection.sync().get("foo");
+    public String testThreads100() {
+        return connection.sync().get("foo");
     }
 
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
                 .include(LettuceTest.class.getSimpleName())
                 .resultFormat(ResultFormatType.TEXT)
-                .result("result-" + System.currentTimeMillis() + ".txt")
+                .result("result/result-" + System.currentTimeMillis() + ".txt")
                 .build();
         new Runner(opt).run();
     }
