@@ -9,5 +9,6 @@ dependencies {
     compile 'org.openjdk.jmh:jmh-core:1.31'
     compile 'org.openjdk.jmh:jmh-generator-annprocess:1.31'
 
+    compile 'org.slf4j:slf4j-simple:1.7.30'
     testCompile 'junit:junit:4.12'
 }
