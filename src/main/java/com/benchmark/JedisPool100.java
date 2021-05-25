@@ -26,6 +26,11 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import static com.benchmark.Constants.PROPERTIES_FILE;
+import static com.benchmark.Constants.PROP_HOST;
+import static com.benchmark.Constants.PROP_PASSWORD;
+import static com.benchmark.Constants.PROP_PORT;
+
 /**
  * https://github.com/redis/jedis/wiki/Getting-started
  *
@@ -45,10 +50,10 @@ public class JedisPool100 {
     @Setup
     public void setup() throws IOException {
         Properties prop = new Properties();
-        prop.load(ClassLoader.getSystemClassLoader().getResourceAsStream("redis.properties"));
-        String host = prop.getProperty("redis.host");
-        int port = Integer.parseInt(prop.getProperty("redis.port"));
-        String password = prop.getProperty("redis.password");
+        prop.load(ClassLoader.getSystemClassLoader().getResourceAsStream(PROPERTIES_FILE));
+        String host = prop.getProperty(PROP_HOST);
+        int port = Integer.parseInt(prop.getProperty(PROP_PORT));
+        String password = prop.getProperty(PROP_PASSWORD);
 
         JedisPoolConfig poolConfig = new JedisPoolConfig();
         poolConfig.setMaxTotal(100);
