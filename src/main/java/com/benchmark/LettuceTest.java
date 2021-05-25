@@ -22,6 +22,8 @@ import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -41,8 +43,15 @@ public class LettuceTest {
     private StatefulRedisConnection<String, String> connection;
 
     @Setup
-    public void setup() {
-        redisClient = RedisClient.create(RedisURI.Builder.redis("172.16.3.95").withPassword("helloworld").build());
+    public void setup() throws IOException {
+        Properties prop = new Properties();
+        prop.load(ClassLoader.getSystemClassLoader().getResourceAsStream("redis.properties"));
+        String host = prop.getProperty("redis.host");
+        int port = Integer.parseInt(prop.getProperty("redis.port"));
+        String password = prop.getProperty("redis.password");
+
+        redisClient = RedisClient.create(RedisURI.Builder.redis(host)
+                .withPort(port).withPassword(password).build());
         connection = redisClient.connect();
     }
 

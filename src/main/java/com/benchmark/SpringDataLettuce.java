@@ -23,6 +23,8 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -42,11 +44,17 @@ public class SpringDataLettuce {
     private StringRedisTemplate template;
 
     @Setup
-    public void setup() {
+    public void setup() throws IOException {
+        Properties prop = new Properties();
+        prop.load(ClassLoader.getSystemClassLoader().getResourceAsStream("redis.properties"));
+        String host = prop.getProperty("redis.host");
+        int port = Integer.parseInt(prop.getProperty("redis.port"));
+        String password = prop.getProperty("redis.password");
+
         RedisStandaloneConfiguration standaloneConfig = new RedisStandaloneConfiguration();
-        standaloneConfig.setHostName("172.16.3.95");
-        standaloneConfig.setPort(6379);
-        standaloneConfig.setPassword(RedisPassword.of("helloworld"));
+        standaloneConfig.setHostName(host);
+        standaloneConfig.setPort(port);
+        standaloneConfig.setPassword(RedisPassword.of(password));
         factory = new LettuceConnectionFactory(standaloneConfig);
         factory.afterPropertiesSet();
         template = new StringRedisTemplate(factory);

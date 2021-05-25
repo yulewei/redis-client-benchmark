@@ -22,6 +22,8 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -41,7 +43,13 @@ public class JedisPool100 {
     private JedisPool jedisPool = null;
 
     @Setup
-    public void setup() {
+    public void setup() throws IOException {
+        Properties prop = new Properties();
+        prop.load(ClassLoader.getSystemClassLoader().getResourceAsStream("redis.properties"));
+        String host = prop.getProperty("redis.host");
+        int port = Integer.parseInt(prop.getProperty("redis.port"));
+        String password = prop.getProperty("redis.password");
+
         JedisPoolConfig poolConfig = new JedisPoolConfig();
         poolConfig.setMaxTotal(100);
         poolConfig.setMaxIdle(100);
@@ -51,7 +59,7 @@ public class JedisPool100 {
         poolConfig.setTestOnReturn(false);
         poolConfig.setTestWhileIdle(false);
 //        jedisPool = new JedisPool(poolConfig, "localhost", 6379, 10000);
-        jedisPool = new JedisPool(poolConfig, "172.16.3.95", 6379, 10000, "helloworld");
+        jedisPool = new JedisPool(poolConfig, host, port, 10000, password);
     }
 
     @TearDown
