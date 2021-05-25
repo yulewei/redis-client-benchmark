@@ -2,7 +2,7 @@
 
 
 对典型的 redis 的 Java 客户端，[Jedis](https://github.com/redis/jedis)、[Lettuce](https://github.com/lettuce-io/lettuce-core)、
-[Spring Data Redis](https://docs.spring.io/spring-data/redis/docs/current/reference/html/)（底层默认基于 Lettuce）进行性能测试。
+[Spring Data Redis](https://docs.spring.io/spring-data/redis/docs/current/reference/html/)（底层默认基于 Lettuce）进行性能测试并对比。
 
 
 客户端 Jedis，基于连接池，连接数 8（即默认的 PoolConfig 配置），线程数分别为 10、50、100，JMH 性能测试结果：
