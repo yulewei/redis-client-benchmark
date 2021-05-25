@@ -1,4 +1,0 @@
-Benchmark                   Mode  Cnt    Score    Error   Units
-JedisPool8.testThreads10   thrpt   10   38.613 ±  5.280  ops/ms
-JedisPool8.testThreads100  thrpt   10  108.204 ± 60.027  ops/ms
-JedisPool8.testThreads50   thrpt   10   44.947 ± 10.505  ops/ms

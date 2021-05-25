@@ -1,0 +1,4 @@
+Benchmark                          Mode  Cnt    Score    Error   Units
+SpringDataLettuce.testThreads10   thrpt   10   78.123 ±  6.632  ops/ms
+SpringDataLettuce.testThreads100  thrpt   10  724.646 ± 53.133  ops/ms
+SpringDataLettuce.testThreads50   thrpt   10  381.857 ± 35.664  ops/ms
