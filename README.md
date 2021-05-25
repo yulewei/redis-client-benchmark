@@ -43,7 +43,7 @@ SpringDataLettuce.testThreads50   thrpt   10  381.857 ± 35.664  ops/ms
 ```
 
 
-分析 JMH 性能测试结果，容易得出如下结论：
+分析 JMH 性能测试结果，容易得出如下**结论**：
 
 1. 客户端 Jedis，配置的连接池的连接数越大，性能相对越高
 2. 客户端 Jedis，在并发的线程数超越连接池的连接数后，吞吐量不再随线程数增加而增大
@@ -52,3 +52,7 @@ SpringDataLettuce.testThreads50   thrpt   10  381.857 ± 35.664  ops/ms
 5. 使用封装的 Lettuce 的 Spring Data Redis，与直接使用 Lettuce，性能区别不大
 
 
+**相关资料：**
+ - Lettuce: Connection Pooling <https://github.com/lettuce-io/lettuce-core/wiki/Connection-Pooling>
+ - Why is Lettuce the default Redis client used in Spring Session Redis? #789 <https://github.com/spring-projects/spring-session/issues/789>
+ - Consider Lettuce instead of Jedis as default Redis driver dependency #10480 <https://github.com/spring-projects/spring-boot/issues/10480>
