@@ -49,6 +49,6 @@ SpringDataLettuce.testThreads50   thrpt   10  381.857 ± 35.664  ops/ms
 2. 客户端 Jedis，在并发的线程数超越连接池的连接数后，吞吐量不再随线程数增加而增大
 3. Lettuce 单连接，性能优于 Jedis 连接池
 4. Lettuce 单连接，吞吐量与并发的线程数正相关
-5. 封装的 Lettuce 的 Spring Data Redis，与直接使用 Lettuce，性能区别不大
+5. 使用封装的 Lettuce 的 Spring Data Redis，与直接使用 Lettuce，性能区别不大
 
 
